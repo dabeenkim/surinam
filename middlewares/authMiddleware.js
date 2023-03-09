@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    const { userId } = jwt.verify(tokenValue, 'Secret-Or-Public-Key');
+    const { userId } = jwt.verify(tokenValue, 'Secret Key');
     const user = await Users.findByPk(userId);
 
     res.locals.user = user;

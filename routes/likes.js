@@ -8,9 +8,23 @@ const { parseModelToFlatObject } = require('../helpers/sequelize.helper');
 const router = express.Router();
 
 // 좋아요 게시글 조회
-router.get('/like', authMiddleware, async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
   try {
     const { userId } = res.locals.user;
+
+    const parseLikePostsModel = (likes) => {
+      return likes.map((like) => {
+        let obj = {};
+
+        for (const [k, v] of Object.entries(like)) {
+          if (k.split('.').length > 1) {
+            const key = k.split('.')[1];
+            obj[key] = v;
+          } else obj[k] = v;
+        }
+        return obj;
+      })
+    }
 
     const posts = await Posts.findAll({
       attributes: [
@@ -39,19 +53,7 @@ router.get('/like', authMiddleware, async (req, res) => {
       raw: true,
     }).then((likes) => parseLikePostsModel(likes));
 
-    const parseLikePostsModel = (likes) => {
-      return likes.map((like) => {
-        let obj = {};
-
-        for (const [k, v] of Object.entries(like)) {
-          if (k.split('.').length > 1) {
-            const key = k.split('.')[1];
-            obj[key] = v;
-          } else obj[k] = v;
-        }
-        return obj;
-      })
-    }
+    
 
     return res.status(200).json({
       data: posts,

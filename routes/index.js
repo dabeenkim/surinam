@@ -9,10 +9,10 @@ const router = express.Router();
 
 
 router.use("/signup", signupRouter);
-router.use("./login", loginRouter);
-router.use("./posts", [postRouter, likeRouter]);
-router.use("./comments", commentRouter);
-// router.use("./like", likeRouter);
+router.use("/login", loginRouter);
+router.use("/posts", [postRouter]);
+router.use("/comments", commentRouter);
+router.use("/like", likeRouter);
 
 
 
