@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "been0519",
-    "database": "surinam",
-    "host": "express-database.cg7f69m1k85k.ap-northeast-2.rds.amazonaws.com",
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
     "port": 3306,
-    "dialect": "mysql",
+    "dialect": "",
     "logging": true
   },
   "test": {
